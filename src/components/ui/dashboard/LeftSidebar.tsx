@@ -12,11 +12,7 @@ export default function LeftSidebar() {
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-<<<<<<< HEAD
     const { logout, session } = useAuth();
-=======
-    const { logout } = useAuth();
->>>>>>> testing
     const router = useRouter();
 
     useEffect(() => {
@@ -66,17 +62,11 @@ export default function LeftSidebar() {
                         className='flex flex-row gap-2 justify-center items-center px-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer py-2'
                     >
                         <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
-<<<<<<< HEAD
                             <Image className='rounded-full object-cover w-full h-full' src='/Logo-withoutText.webp' alt='Icono de usuario' width={40} height={40} />
                         </div>
                         <span className="hidden md:block text-thirdary">
                             {(session?.user as any)?.username || session?.user?.name || 'Usuario'}
                         </span>
-=======
-                            <Image className='rounded-full object-cover w-full h-full' src='/Profile.png' alt='Foto de Perfil' width={40} height={40} />
-                        </div>
-                        <span className="hidden md:block text-thirdary">Jhossua</span>
->>>>>>> testing
                     </button>
 
                     {/* Menú del perfil */}

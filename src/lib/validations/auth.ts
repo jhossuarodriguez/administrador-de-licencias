@@ -35,14 +35,10 @@ export const signupSchema = z.object({
         .max(64, "La contraseña no puede exceder 64 caracteres")
         .regex(/[a-z]/, "La contraseña debe contener al menos una minúscula")
         .regex(/[A-Z]/, "La contraseña debe contener al menos una mayúscula")
-<<<<<<< HEAD
         .regex(/[0-9]/, "La contraseña debe contener al menos un número")
         .regex(/[!@#$%^&*(),.?":{}|<>]/, "La contraseña debe contener al menos un carácter especial"),
-=======
-        .regex(/[0-9]/, "La contraseña debe contener al menos un número"),
->>>>>>> testing
     confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
+}).refine((data: { password: string; confirmPassword: string }) => data.password === data.confirmPassword, {
     message: "Las contraseñas no coinciden",
     path: ["confirmPassword"],
 });

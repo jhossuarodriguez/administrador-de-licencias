@@ -48,11 +48,6 @@ export function useAuth() {
                 callbackURL: "/dashboard",
             })
 
-<<<<<<< HEAD
-=======
-            console.log('Login response:', response)
-
->>>>>>> testing
             // Verificar si el login fue exitoso
             if (response.error) {
                 setAuthError(response.error.message || "Contraseña incorrecta")
@@ -63,10 +58,6 @@ export function useAuth() {
             setIsLoading(false)
             return { success: true, data: response }
         } catch (error) {
-<<<<<<< HEAD
-=======
-            console.error("Error al iniciar sesión:", error)
->>>>>>> testing
             setAuthError("Usuario o contraseña incorrectos")
             setIsLoading(false)
             return { success: false, error: "Usuario o contraseña incorrectos" }
@@ -109,16 +100,7 @@ export function useAuth() {
                 credentials: 'include',
             })
 
-<<<<<<< HEAD
             const textResponse = await response.text()
-=======
-            // Log completo de la respuesta
-            console.log('Response status:', response.status)
-            console.log('Response headers:', Object.fromEntries(response.headers.entries()))
-
-            const textResponse = await response.text()
-            console.log('Response body (raw):', textResponse)
->>>>>>> testing
 
             let data: any = {}
             try {
@@ -126,22 +108,10 @@ export function useAuth() {
                     data = JSON.parse(textResponse)
                 }
             } catch (e) {
-<<<<<<< HEAD
-=======
-                console.error('Failed to parse JSON response:', e)
->>>>>>> testing
                 data = { error: textResponse || 'Invalid response from server' }
             }
 
             if (!response.ok) {
-<<<<<<< HEAD
-=======
-                console.error('❌ Signup failed!')
-                console.error('Status:', response.status, response.statusText)
-                console.error('Data:', data)
-                console.error('Raw response:', textResponse)
-
->>>>>>> testing
                 const errorMsg = data?.message || data?.error || textResponse || `HTTP ${response.status}: ${response.statusText}`
                 setAuthError(errorMsg)
                 throw new Error(errorMsg)
@@ -154,10 +124,6 @@ export function useAuth() {
             setIsLoading(false)
             return { success: true, data }
         } catch (error: any) {
-<<<<<<< HEAD
-=======
-            console.error("Error completo al registrarse:", error)
->>>>>>> testing
             const errorMessage = error?.message || error?.toString() || "Error al crear la cuenta"
             setAuthError(errorMessage.includes("unique") || errorMessage.includes("already exists")
                 ? "El usuario o email ya existe."
@@ -176,10 +142,6 @@ export function useAuth() {
             setIsLoading(false)
             return { success: true }
         } catch (error) {
-<<<<<<< HEAD
-=======
-            console.error("Error al cerrar sesión:", error)
->>>>>>> testing
             setAuthError("Error al cerrar sesión")
             setIsLoading(false)
             return { success: false, error }

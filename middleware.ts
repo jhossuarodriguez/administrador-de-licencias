@@ -23,7 +23,6 @@ export async function middleware(req: NextRequest) {
             // No hay sesión válida, redirigir a login
             return NextResponse.redirect(new URL('/', req.url));
         }
-<<<<<<< HEAD
 
         // Validar el token de sesión con Better Auth
         try {
@@ -51,8 +50,6 @@ export async function middleware(req: NextRequest) {
             // Error al validar sesión, redirigir a login por seguridad
             return NextResponse.redirect(new URL('/', req.url));
         }
-=======
->>>>>>> testing
     }
 
     return NextResponse.next();

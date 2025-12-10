@@ -1,0 +1,39 @@
+# Archivos de desarrollo
+.env.local
+.env.development
+.env.test
+*.log
+
+# Tests
+/test
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentación de desarrollo
+/docs
+README.md
+DEPLOYMENT.md
+
+# Docker (no necesario en Vercel)
+/docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Prisma
+prisma/migrations/*.sql

@@ -1,9 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
-<<<<<<< HEAD
 import { isRateLimited, recordFailedAttempt, getTimeUntilReset } from "@/lib/rateLimit"
-=======
->>>>>>> testing
 
 export async function GET(
     request: Request,
@@ -19,7 +16,6 @@ export async function GET(
             )
         }
 
-<<<<<<< HEAD
         // Obtener IP del cliente para rate limiting
         const ip = request.headers.get('x-forwarded-for') ||
             request.headers.get('x-real-ip') ||
@@ -38,8 +34,6 @@ export async function GET(
             );
         }
 
-=======
->>>>>>> testing
         const user = await prisma.user.findUnique({
             where: { username },
             select: {
@@ -52,11 +46,8 @@ export async function GET(
         })
 
         if (!user) {
-<<<<<<< HEAD
             // Registrar intento fallido
             recordFailedAttempt(identifier, { windowMinutes: 15 });
-=======
->>>>>>> testing
             return NextResponse.json(
                 { error: "Usuario o contraseña incorrectos" },
                 { status: 404 }
@@ -72,10 +63,6 @@ export async function GET(
 
         return NextResponse.json(user)
     } catch (error) {
-<<<<<<< HEAD
-=======
-        console.error("Error al buscar usuario:", error)
->>>>>>> testing
         return NextResponse.json(
             { error: "Error interno del servidor" },
             { status: 500 }
