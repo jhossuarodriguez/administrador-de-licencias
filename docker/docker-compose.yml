@@ -1,0 +1,35 @@
+services:
+  license-administrator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: license-administrator
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker
+    depends_on:
+      - caid_postgres
+    volumes:
+      - ..:/app
+      - /app/node_modules
+    command: pnpm run dev
+
+  # PostgreSQL 
+  caid_postgres:
+    image: postgres:latest
+    container_name: caid_postgres
+    restart: unless-stopped
+    env_file:
+      - .env # lee las variables del archivo .env local
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql
+    ports:
+      - "5432:5432" # expone Postgres en localhost:5432
+
+volumes:
+  pgdata:

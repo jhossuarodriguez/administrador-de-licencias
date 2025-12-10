@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id                    Int       @id @default(autoincrement())
+  userId                Int
+  type                  String?
+  refresh_token         String?
+  access_token          String?
+  token_type            String?
+  id_token              String?
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model User {
+  id            Int          @id @default(autoincrement())
+  name          String
+  username      String?      @unique
+  status        String       @default("active")
+  departmentId  Int?
+  department    Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  startDate     DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  accounts      Account[]
+  Assignment    Assignment[]
+  sessions      Session[]
+  email         String
+  emailVerified Boolean      @default(false)
+  image         String?
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String?  @unique
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime
+  token        String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  ipAddress    String?
+  userAgent    String?
+
+  @@index([userId])
+  @@map("session")
+}
+
+model License {
+  id              Int          @id @default(autoincrement())
+  sede            String?
+  provider        String
+  startDate       DateTime?
+  expiration      DateTime?
+  assigned        String?
+  departmentId    Int?
+  department      Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  model           String?
+  plan            String?
+  unitCost        Decimal      @db.Decimal(10, 2)
+  installmentCost Decimal      @db.Decimal(10, 2)
+  penaltyCost     Decimal      @db.Decimal(10, 2)
+  billingCycle    BillingCycle @default(MONTHLY)
+  totalLicense    Int          @default(0)
+  usedLicense     Int          @default(0)
+  active          Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime
+  Assignment      Assignment[]
+}
+
+model Assignment {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  licenseId  Int
+  assignedAt DateTime @default(now())
+  license    License  @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, licenseId])
+}
+
+model SavedReport {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  config      Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lastUsed    DateTime @default(now())
+}
+
+model Department {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  users       User[]
+  licenses    License[]
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
