@@ -22,22 +22,14 @@
     "clsx": "2.1.1",
     "lucide-react": "0.545.0",
     "motion": "12.23.22",
-<<<<<<< HEAD
     "next": "16.0.8",
-=======
-    "next": "16.0.1",
->>>>>>> testing
     "pg": "8.16.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "recharts": "3.2.1",
     "swr": "2.3.6",
     "tailwind-merge": "3.3.1",
-<<<<<<< HEAD
     "zod": "4.1.13"
-=======
-    "zod": "^4.1.13"
->>>>>>> testing
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
