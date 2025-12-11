@@ -62,7 +62,7 @@ export default function LeftSidebar() {
                         className='flex flex-row gap-2 justify-center items-center px-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer py-2'
                     >
                         <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
-                            <Image className='rounded-full object-cover w-full h-full' src='/Logo-withoutText.webp' alt='Icono de usuario' width={40} height={40} />
+                            <Image className='rounded-full object-cover w-full h-full' src='/logo.png' alt='Icono de usuario' width={40} height={40} />
                         </div>
                         <span className="hidden md:block text-thirdary">
                             {(session?.user as any)?.username || session?.user?.name || 'Usuario'}
@@ -106,8 +106,8 @@ export default function LeftSidebar() {
 
             {/* Pages */}
             <div className='flex flex-col justify-center items-center mt-10 mb-2'>
-                <Image loading='eager' className='hidden md:block aspect-[140/70]' src="/CAID-LOGO.webp" alt='Logo del CAID' width={140} height={140} />
-                <Image loading='eager' className='block md:hidden' src='/Logo-withoutText.webp' alt='Logo del CAID' width={80} height={80} />
+                <Image loading='eager' className='hidden md:block aspect-[140/70]' src="/logo.png" alt='Logo' width={140} height={140} />
+                <Image loading='eager' className='block md:hidden' src='/logo.png' alt='Logo' width={80} height={80} />
                 <span className='mt-1 text-center text-sm text-gray-500'>Version 1.0.0</span>
             </div>
         </div>
