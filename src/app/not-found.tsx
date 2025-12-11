@@ -6,8 +6,8 @@ export default function NotFound() {
     return (
         <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
             <Image
-                src="/CAID-LOGO.webp"
-                alt="CAID Logo"
+                src="/logo.png"
+                alt="Logo"
                 fill
                 className="object-cover opacity-10 -z-10"
                 priority
