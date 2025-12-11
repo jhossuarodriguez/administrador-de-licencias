@@ -332,7 +332,7 @@ export async function POST(request: NextRequest) {
         csvContent += '\n';
         csvContent += 'INFORMACION DEL REPORTE\n';
         csvContent += '\n';
-        csvContent += 'Sistema:,License Administrator - CAID\n';
+        csvContent += 'Sistema:,License Administrator\n';
         csvContent += 'Fecha generacion:,' + new Date().toISOString().split('T')[0] + '\n';
         csvContent += 'Nombre reporte:,' + (config.name || 'Sin nombre') + '\n';
         if (config.description) {
