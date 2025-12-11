@@ -11,7 +11,7 @@ const arconFont = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Administrador de Licencias - CAID",
+  title: "Administrador de Licencias",
   description: "Administrador de Licencias creado con NextJS",
 };
 
