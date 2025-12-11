@@ -177,7 +177,7 @@ async function main() {
         create: {
             name: "Jhossua Rodriguez",
             username: "jhossuarodriguezz",
-            email: "jhossua.rodriguez@caid.edu.do",
+            email: "jhossua.rodriguez@example.do",
             status: "active",
             departmentId: deptIT.id,
             startDate: new Date("2023-08-05"),
@@ -192,7 +192,7 @@ async function main() {
         create: {
             name: "María García",
             username: "maria.garcia",
-            email: "maria.garcia@caid.edu.do",
+            email: "maria.garcia@example.do",
             status: "active",
             departmentId: deptMarketing.id,
             startDate: new Date("2024-01-15"),
@@ -207,7 +207,7 @@ async function main() {
         create: {
             name: "Carlos Mendoza",
             username: "carlos.mendoza",
-            email: "carlos.mendoza@caid.edu.do",
+            email: "carlos.mendoza@example.do",
             status: "active",
             departmentId: deptEngineering.id,
             createdAt: new Date("2024-02-20"),
@@ -221,7 +221,7 @@ async function main() {
         create: {
             name: "Ana Martínez",
             username: "ana.martinez",
-            email: "ana.martinez@caid.edu.do",
+            email: "ana.martinez@example.do",
             status: "active",
             departmentId: deptSales.id,
             createdAt: new Date("2024-03-10"),
@@ -235,7 +235,7 @@ async function main() {
         create: {
             name: "Luis Fernández",
             username: "luis.fernandez",
-            email: "luis.fernandez@caid.edu.do",
+            email: "luis.fernandez@example.do",
             status: "active",
             departmentId: deptFinance.id,
             createdAt: new Date("2024-04-05"),
