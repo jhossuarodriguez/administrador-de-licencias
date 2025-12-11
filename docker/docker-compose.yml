@@ -7,18 +7,18 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env.docker
+      - .env
     depends_on:
-      - caid_postgres
+      - license_postgres
     volumes:
       - ..:/app
       - /app/node_modules
     command: pnpm run dev
 
   # PostgreSQL 
-  caid_postgres:
+  license_postgres:
     image: postgres:latest
-    container_name: caid_postgres
+    container_name: license_postgres
     restart: unless-stopped
     env_file:
       - .env # lee las variables del archivo .env local
