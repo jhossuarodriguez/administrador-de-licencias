@@ -38,24 +38,16 @@ export default function Signup() {
 
     return (
         <div className="flex min-h-screen w-full overflow-hidden">
-            {/* Left Side - Image Section */}
-            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#1A2E35] via-[#2a4550] to-[#1A2E35] items-center justify-center relative overflow-hidden">
-                {/* Decorative elements */}
-                <div className="absolute top-20 left-20 w-64 h-64 bg-secondary rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <div className="absolute bottom-20 right-20 w-80 h-80 bg-primary rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[#DDF2F9] rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
-
-                {/* Logo/Image */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full w-full max-h-screen">
-                    <Image
-                        className="object-contain drop-shadow-2xl opacity-90 max-h-[80vh] w-auto"
-                        src='/logo.png'
-                        alt=' Logo'
-                        width={500}
-                        height={700}
-                        priority
-                    />
-                </div>
+            {/* Left Side - Video Section */}
+            <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+                <video
+                    className="h-screen w-full object-cover"
+                    src="/video.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
             </div>
 
             {/* Right Side - Signup Form */}
@@ -63,7 +55,7 @@ export default function Signup() {
                 <div className="w-full max-w-md space-y-8">
                     {/* Header */}
                     <div className="text-center">
-                        <div className="flex items-center justify-center mb-6 lg:hidden">
+                        <div className="flex items-center justify-center mb-6">
                             <Image
                                 src="/logo.png"
                                 alt='Logo'
