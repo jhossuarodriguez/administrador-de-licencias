@@ -49,8 +49,8 @@ export default function Signup() {
                 <div className="relative z-10 flex flex-col items-center justify-center h-full w-full max-h-screen">
                     <Image
                         className="object-contain drop-shadow-2xl opacity-90 max-h-[80vh] w-auto"
-                        src='/CAID-LOGO.webp'
-                        alt='CAID Logo'
+                        src='/logo.png'
+                        alt=' Logo'
                         width={500}
                         height={700}
                         priority
@@ -65,16 +65,13 @@ export default function Signup() {
                     <div className="text-center">
                         <div className="flex items-center justify-center mb-6 lg:hidden">
                             <Image
-                                src="/CAID-LOGO.webp"
-                                alt='Logo del CAID'
+                                src="/logo.png"
+                                alt='Logo'
                                 width={120}
                                 height={120}
                             />
                         </div>
                         <h2 className="text-3xl font-bold text-gray-900">Regístrate</h2>
-                        <p className="mt-2 text-sm text-gray-600">
-                            Crea tu cuenta para administrar licencias
-                        </p>
                     </div>
 
                     {/* Signup Form */}
