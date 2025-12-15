@@ -65,10 +65,8 @@ export const auth = betterAuth({
     },
 
     trustedOrigins: [
-        "http://localhost:3000",
-        "https://administrador-de-licencias.vercel.app",
-        process.env.BETTER_AUTH_URL || "",
-        process.env.NEXT_PUBLIC || "",
+        process.env.NEXT_PUBLIC || "http://localhost:3000",
+        process.env.BETTER_AUTH_URL || "http://localhost:3000",
     ].filter(Boolean),
 
     plugins: [
