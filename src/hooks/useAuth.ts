@@ -45,7 +45,15 @@ export function useAuth() {
             const response = await signIn.email({
                 email: userData.email,
                 password,
-                callbackURL: "/dashboard",
+                fetchOptions: {
+                    onSuccess: async () => {
+                        window.location.href = "/dashboard"
+                    },
+                    onError: (ctx) => {
+                        console.error("Login error:", ctx.error)
+                        setAuthError(ctx.error.message || "Contraseña incorrecta")
+                    },
+                },
             })
 
             // Verificar si el login fue exitoso
@@ -58,6 +66,7 @@ export function useAuth() {
             setIsLoading(false)
             return { success: true, data: response }
         } catch (error) {
+            console.error("Login error:", error)
             setAuthError("Usuario o contraseña incorrectos")
             setIsLoading(false)
             return { success: false, error: "Usuario o contraseña incorrectos" }

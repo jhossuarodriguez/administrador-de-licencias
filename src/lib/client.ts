@@ -1,6 +1,5 @@
 import { createAuthClient } from "better-auth/react"
 
-// En el cliente, usar directamente la variable o detectar el entorno
 const getBaseURL = () => {
     // En el navegador, usar la variable de entorno o la URL actual
     if (typeof window !== 'undefined') {
