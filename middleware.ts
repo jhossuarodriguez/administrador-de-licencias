@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getSessionCookie } from 'better-auth/cookies';
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
@@ -16,40 +17,18 @@ export async function middleware(req: NextRequest) {
 
     // Proteger rutas del dashboard
     if (pathname.startsWith('/dashboard')) {
-        // Buscar cookie de sesión de Better Auth
-        const sessionCookie = req.cookies.get('better-auth.session_token');
+        // Usar getSessionCookie de Better Auth para verificar la existencia de la cookie
+        // NOTA: Esta verificación solo comprueba la existencia de la cookie, no su validez
+        // La validación completa debe hacerse en cada página/ruta protegida
+        const sessionCookie = getSessionCookie(req);
 
-        if (!sessionCookie?.value) {
-            // No hay sesión válida, redirigir a login
+        if (!sessionCookie) {
+            // No hay cookie de sesión, redirigir a login
             return NextResponse.redirect(new URL('/', req.url));
         }
 
-        // Validar el token de sesión con Better Auth
-        try {
-            const baseUrl = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
-            const response = await fetch(`${baseUrl}/api/auth/get-session`, {
-                headers: {
-                    'Cookie': `better-auth.session_token=${sessionCookie.value}`,
-                },
-            });
-
-            if (!response.ok) {
-                // Token inválido o expirado, redirigir a login
-                return NextResponse.redirect(new URL('/', req.url));
-            }
-
-            const session = await response.json();
-
-            if (!session?.user) {
-                // No hay usuario en la sesión, redirigir a login
-                return NextResponse.redirect(new URL('/', req.url));
-            }
-
-            // Sesión válida, continuar
-        } catch (error) {
-            // Error al validar sesión, redirigir a login por seguridad
-            return NextResponse.redirect(new URL('/', req.url));
-        }
+        // La cookie existe, permitir el acceso
+        // La validación completa de la sesión se hace en los componentes del servidor
     }
 
     return NextResponse.next();
