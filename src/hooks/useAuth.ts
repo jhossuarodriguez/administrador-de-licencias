@@ -4,7 +4,6 @@ import { useSession, signIn, signOut, signUp } from "@/lib/client"
 import { useState } from "react"
 import type { LoginData, SignupData } from "@/types/auth"
 import { loginSchema, signupSchema } from "@/lib/validations/auth"
-import { ZodError } from "zod"
 
 export function useAuth() {
     const { data: session, isPending, error } = useSession()
@@ -15,20 +14,17 @@ export function useAuth() {
         setAuthError("")
         setIsLoading(true)
 
-        try {
-            // Validar con Zod
-            const validatedData = loginSchema.parse({
-                identifier: username,
-                password,
-            });
+        // Validar con Zod usando safeParse
+        const validationResult = loginSchema.safeParse({
+            identifier: username,
+            password,
+        });
 
-        } catch (error: any) {
-            if (error instanceof ZodError) {
-                const firstError = error.issues[0]?.message;
-                setAuthError(firstError || "Datos inválidos");
-                setIsLoading(false);
-                return { success: false, error: firstError || "Datos inválidos" };
-            }
+        if (!validationResult.success) {
+            const firstError = validationResult.error.issues[0]?.message;
+            setAuthError(firstError || "Datos inválidos");
+            setIsLoading(false);
+            return { success: false, error: firstError || "Datos inválidos" };
         }
 
         try {
@@ -77,22 +73,20 @@ export function useAuth() {
         setAuthError("")
         setIsLoading(true)
 
-        try {
-            // Validar con Zod
-            const validatedData = signupSchema.parse({
-                name,
-                username,
-                email,
-                password,
-                confirmPassword: confirmPassword || password,
-            });
-        } catch (error: any) {
-            if (error instanceof ZodError) {
-                const firstError = error.issues[0]?.message;
-                setAuthError(firstError || "Datos inválidos");
-                setIsLoading(false);
-                return { success: false, error: firstError || "Datos inválidos" };
-            }
+        // Validar con Zod usando safeParse
+        const validationResult = signupSchema.safeParse({
+            name,
+            username,
+            email,
+            password,
+            confirmPassword: confirmPassword || password,
+        });
+
+        if (!validationResult.success) {
+            const firstError = validationResult.error.issues[0]?.message;
+            setAuthError(firstError || "Datos inválidos");
+            setIsLoading(false);
+            return { success: false, error: firstError || "Datos inválidos" };
         }
 
         try {
@@ -111,17 +105,17 @@ export function useAuth() {
 
             const textResponse = await response.text()
 
-            let data: any = {}
+            let data: Record<string, unknown> = {}
             try {
                 if (textResponse) {
                     data = JSON.parse(textResponse)
                 }
-            } catch (e) {
+            } catch {
                 data = { error: textResponse || 'Invalid response from server' }
             }
 
             if (!response.ok) {
-                const errorMsg = data?.message || data?.error || textResponse || `HTTP ${response.status}: ${response.statusText}`
+                const errorMsg = (data?.message as string) || (data?.error as string) || textResponse || `HTTP ${response.status}: ${response.statusText}`
                 setAuthError(errorMsg)
                 throw new Error(errorMsg)
             }
@@ -132,8 +126,8 @@ export function useAuth() {
 
             setIsLoading(false)
             return { success: true, data }
-        } catch (error: any) {
-            const errorMessage = error?.message || error?.toString() || "Error al crear la cuenta"
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : "Error al crear la cuenta"
             setAuthError(errorMessage.includes("unique") || errorMessage.includes("already exists")
                 ? "El usuario o email ya existe."
                 : errorMessage)
