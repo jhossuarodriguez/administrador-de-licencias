@@ -3,7 +3,16 @@ import { prisma } from '@/lib/prisma'
 
 export async function GET() {
     try {
+        // Obtener solo usuarios que NO tienen cuenta registrada
+        // Los usuarios con cuenta (administradores/operadores) no deben aparecer aquí
         const users = await prisma.user.findMany({
+            where: {
+                // Excluir usuarios que tienen cuentas o sesiones (usuarios registrados del sistema)
+                AND: [
+                    { accounts: { none: {} } },
+                    { sessions: { none: {} } }
+                ]
+            },
             select: {
                 id: true,
                 name: true,
@@ -32,6 +41,7 @@ export async function GET() {
                 }
             }
         })
+
         return NextResponse.json(users)
     } catch (err) {
         console.error("Error al obtener usuarios:", err)
@@ -146,9 +156,39 @@ export async function DELETE(request: NextRequest) {
             );
         }
 
+        const userIdInt = parseInt(userId);
+
+        // PROTECCIÓN DE SEGURIDAD: Verificar si el usuario tiene cuenta registrada
+        const userWithAccounts = await prisma.user.findUnique({
+            where: { id: userIdInt },
+            select: {
+                id: true,
+                accounts: { select: { id: true } },
+                sessions: { select: { id: true } }
+            }
+        });
+
+        if (!userWithAccounts) {
+            return NextResponse.json(
+                { error: 'Usuario no encontrado' },
+                { status: 404 }
+            );
+        }
+
+        // Bloquear eliminación de usuarios con cuenta registrada
+        if (userWithAccounts.accounts.length > 0 || userWithAccounts.sessions.length > 0) {
+            return NextResponse.json(
+                {
+                    error: 'No se puede eliminar un usuario con cuenta registrada. Este usuario tiene una cuenta activa en el sistema.',
+                    code: 'REGISTERED_USER_PROTECTED'
+                },
+                { status: 403 }
+            );
+        }
+
         await prisma.user.delete({
             where: {
-                id: parseInt(userId)
+                id: userIdInt
             }
         });
 
