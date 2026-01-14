@@ -106,7 +106,7 @@ export default function LeftSidebar() {
 
             {/* Pages */}
             <div className='flex flex-col justify-center items-center mt-10 mb-2'>
-                <Image loading='eager' className='aspect-[140/50] opacity-45' src="/logo.png" alt='Logo' width={80} height={80} />
+                <Image loading='eager' className='opacity-45' src="/logo.png" alt='Logo' width={80} height={80} />
                 <span className='mt-1 text-center text-sm text-gray-500'>Version 1.0.0</span>
             </div>
         </div>
