@@ -5,7 +5,15 @@ export async function GET() {
     try {
         const [totalLicenses, totalUsers, activeLicenses] = await Promise.all([
             prisma.license.count(),
-            prisma.user.count(),
+            // Excluir usuarios que tienen cuentas o sesiones (administradores/operadores autenticados)
+            prisma.user.count({
+                where: {
+                    AND: [
+                        { accounts: { none: {} } },
+                        { sessions: { none: {} } }
+                    ]
+                }
+            }),
             prisma.license.count({ where: { active: true } })
         ])
 
@@ -106,7 +114,13 @@ async function calculateTrends() {
     // Datos del mes actual
     const [currentUsers, currentLicenses, currentActive, currentExpiring] = await Promise.all([
         prisma.user.count({
-            where: { createdAt: { gte: thisMonth } }
+            where: {
+                createdAt: { gte: thisMonth },
+                AND: [
+                    { accounts: { none: {} } },
+                    { sessions: { none: {} } }
+                ]
+            }
         }),
         prisma.license.count({
             where: { createdAt: { gte: thisMonth } }
@@ -127,7 +141,11 @@ async function calculateTrends() {
                 createdAt: {
                     gte: lastMonth,
                     lt: thisMonth
-                }
+                },
+                AND: [
+                    { accounts: { none: {} } },
+                    { sessions: { none: {} } }
+                ]
             }
         }),
         prisma.license.count({
