@@ -134,7 +134,7 @@ export function UsersTable() {
                                             : 'Sin asignar'
                                         }
                                     </td>
-                                    <td className="px-6 py-4 flex gap-3 justify-center">
+                                    <td className="px-6 py-4 flex gap-3 justify-center items-center">
                                         <button className="cursor-pointer text-secondary hover:underline" onClick={() => openEditModal(user.id)}>
                                             Editar
                                         </button>
