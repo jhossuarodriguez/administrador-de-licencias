@@ -88,7 +88,7 @@ export default function Signup() {
                                 id="name"
                                 name="name"
                                 type="text"
-                                placeholder="Juan Pérez"
+                                placeholder="Nombre"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
                                 disabled={isLoading}
@@ -103,7 +103,7 @@ export default function Signup() {
                                 id="username"
                                 name="username"
                                 type="text"
-                                placeholder="juanperez"
+                                placeholder="Usuario"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
                                 disabled={isLoading}
