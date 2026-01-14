@@ -9,7 +9,7 @@ if (!connectionString) {
 }
 
 // Configuración del pool con SSL para producción (Supabase requiere SSL)
-const pool = new Pool({ 
+const pool = new Pool({
     connectionString,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
