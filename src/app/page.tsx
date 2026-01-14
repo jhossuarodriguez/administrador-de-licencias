@@ -54,12 +54,12 @@ export default function Home() {
                 </div>
               )}
               <div className="grid gap-2">
-                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario</Label>
+                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario o Email</Label>
                 <Input
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="usuario"
+                  placeholder="usuario o correo@ejemplo.com"
                   className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-[#44ADE2] focus:ring-[#44ADE2] h-11"
                   required
                   disabled={isLoading || isPending}
