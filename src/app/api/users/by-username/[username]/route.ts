@@ -34,8 +34,13 @@ export async function GET(
             );
         }
 
-        const user = await prisma.user.findUnique({
-            where: { username },
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { username },
+                    { email: username } // También buscar por email
+                ]
+            },
             select: {
                 id: true,
                 email: true,
