@@ -54,7 +54,7 @@ export default function Home() {
                 </div>
               )}
               <div className="grid gap-2">
-                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario o Correo Electrónico*</Label>
+                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario o Correo Electrónico</Label>
                 <Input
                   id="username"
                   name="username"
