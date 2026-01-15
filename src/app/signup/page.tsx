@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function Signup() {
-    const { signup, isLoading, authError } = useAuth()
+    const { signup, authError } = useAuth()
     const router = useRouter()
     const [successMessage, setSuccessMessage] = useState("")
 
@@ -29,7 +29,6 @@ export default function Signup() {
         if (result.success) {
             setSuccessMessage("¡Cuenta creada exitosamente! Redirigiendo al inicio de sesión...")
 
-            // Redireccionar al login después de 2 segundos
             setTimeout(() => {
                 router.push("/")
             }, 2000)
@@ -82,7 +81,7 @@ export default function Signup() {
 
                         <div>
                             <Label htmlFor="name" className="text-sm font-medium text-gray-700">
-                                Nombre Completo
+                                Nombre*
                             </Label>
                             <Input
                                 id="name"
@@ -91,13 +90,12 @@ export default function Signup() {
                                 placeholder="Nombre"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
-                                disabled={isLoading}
                             />
                         </div>
 
                         <div>
                             <Label htmlFor="username" className="text-sm font-medium text-gray-700">
-                                Usuario
+                                Usuario*
                             </Label>
                             <Input
                                 id="username"
@@ -106,38 +104,35 @@ export default function Signup() {
                                 placeholder="Usuario"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
-                                disabled={isLoading}
                             />
                         </div>
 
                         <div>
                             <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                                Email
+                                Email*
                             </Label>
                             <Input
                                 id="email"
                                 name="email"
                                 type="email"
-                                placeholder="correo@ejemplo.com"
+                                placeholder="Correo electrónico"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
-                                disabled={isLoading}
                             />
                         </div>
 
                         <div>
                             <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-                                Contraseña
+                                Contraseña*
                             </Label>
                             <Input
                                 id="password"
                                 name="password"
                                 type="password"
-                                placeholder="••••••••"
+                                placeholder="Contraseña"
                                 className="mt-1.5 h-11 border-gray-300 focus:border-primary focus:ring-primary"
                                 required
                                 minLength={8}
-                                disabled={isLoading}
                             />
                             <p className="mt-1 text-xs text-gray-500">
                                 Mínimo 8 caracteres
@@ -147,9 +142,8 @@ export default function Signup() {
                         <Button
                             type="submit"
                             className="w-full h-11 bg-gray-900 hover:bg-gray-800 text-white font-medium cursor-pointer"
-                            disabled={isLoading}
                         >
-                            {isLoading ? "Creando cuenta..." : "Crear Cuenta"}
+                            Crear Cuenta
                         </Button>
                     </form>
 
