@@ -17,7 +17,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "next/navigation"
 
 export default function Home() {
-  const { login, isPending, isLoading, authError } = useAuth()
+  const { login, authError } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,15 +54,13 @@ export default function Home() {
                 </div>
               )}
               <div className="grid gap-2">
-                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario o Email</Label>
+                <Label htmlFor="username" className="text-sm font-medium text-gray-700">Usuario o Correo Electrónico*</Label>
                 <Input
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="usuario o correo@ejemplo.com"
                   className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-[#44ADE2] focus:ring-[#44ADE2] h-11"
                   required
-                  disabled={isLoading || isPending}
                 />
               </div>
               <div className="grid gap-2">
@@ -75,11 +73,9 @@ export default function Home() {
                 <Input
                   id="password"
                   name="password"
-                  placeholder="••••••••"
                   type="password"
                   className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-[#44ADE2] focus:ring-[#44ADE2] h-11"
                   required
-                  disabled={isLoading || isPending}
                 />
               </div>
             </div>
@@ -90,9 +86,8 @@ export default function Home() {
             type="submit"
             form="login-form"
             className="w-full text-white bg-gray-900 hover:bg-gray-800 h-11 font-medium cursor-pointer"
-            disabled={isLoading || isPending}
           >
-            {isLoading || isPending ? "Iniciando sesión..." : "Iniciar Sesión"}
+            Iniciar Sesión
           </Button>
           <div className="text-sm text-gray-600">
             ¿No tienes una cuenta?{' '}
