@@ -41,7 +41,7 @@ export default function Signup() {
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
                 <Image
                     className="h-screen w-full object-cover"
-                    src="/left-bento.png"
+                    src="/left-bento.webp"
                     alt="Image Background"
                 />
             </div>
