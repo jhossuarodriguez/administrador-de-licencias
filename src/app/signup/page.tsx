@@ -39,13 +39,10 @@ export default function Signup() {
         <div className="flex min-h-screen w-full overflow-hidden">
             {/* Left Side - Video Section */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
-                <video
+                <Image
                     className="h-screen w-full object-cover"
-                    src="/video.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    src="/left-bento.png"
+                    alt="Image Background"
                 />
             </div>
 
