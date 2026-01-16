@@ -40,7 +40,7 @@ export default function Signup() {
             {/* Left Side - Video Section */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
                 <div className="w-full absolute z-10 flex flex-col items-center justify-center text-center ">
-                    <h1 className="text-4xl font-bold text-white mb-4 mt-20">
+                    <h1 className="text-4xl font-bold text-white mb-2 mt-20">
                         Crea tu cuenta gratis
                     </h1>
                     <span className="mt-3 text-white">
@@ -48,7 +48,7 @@ export default function Signup() {
                     </span>
                 </div>
                 <img
-                    className="h-screen w-full object-cover"
+                    className="h-full w-full object-cover"
                     src="/bg-darkest.webp"
                     alt="Image Background"
                 />
