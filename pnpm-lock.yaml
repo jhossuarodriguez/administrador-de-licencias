@@ -58,7 +58,7 @@ importers:
         specifier: 16.1.1
         version: 16.1.1(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       nextjs-toploader:
-        specifier: ^3.9.17
+        specifier: 3.9.17
         version: 3.9.17(next@16.1.1(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       pg:
         specifier: 8.16.3
