@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import NextTopLoader from 'nextjs-toploader';
 
 const arconFont = localFont({
   src: './fonts/Arcon-Regular.woff2',
@@ -49,6 +50,7 @@ export default function RootLayout({
         className={`${arconFont.className} antialiased`}
       >
         <AuthProvider>
+          <NextTopLoader />
           {children}
         </AuthProvider>
       </body>
