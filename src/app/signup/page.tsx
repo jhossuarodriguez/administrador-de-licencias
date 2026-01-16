@@ -39,11 +39,21 @@ export default function Signup() {
         <div className="flex min-h-screen w-full overflow-hidden">
             {/* Left Side - Video Section */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
-                <Image
+                <div className="w-full absolute z-10 flex flex-col items-center justify-center text-center ">
+                    <h1 className="text-4xl font-bold text-white mb-4 mt-20">
+                        Crea tu cuenta gratis
+                    </h1>
+                    <span className="mt-3 text-white">
+                        Descubre las funciones principales de este sistema para individuos y organizaciones.
+                    </span>
+                </div>
+                <img
                     className="h-screen w-full object-cover"
                     src="/bg-darkest.webp"
                     alt="Image Background"
                 />
+
+                <img className="absolute bottom-0 left-0 w-full" src="/avatars.webp" alt="Avatars" />
             </div>
 
             {/* Right Side - Signup Form */}
