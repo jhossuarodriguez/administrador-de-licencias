@@ -11,8 +11,6 @@ type FrankfurterRateResponse = {
     rate: number;
 };
 
-export const revalidate = 43200;
-
 export async function GET() {
     try {
         const { response: authResponse } = await requireApiSession();
