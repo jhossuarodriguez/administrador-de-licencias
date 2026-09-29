@@ -1,0 +1,86 @@
+
+
+# ─── Etapa 1: dependencias ───────────────────────────────────────────────────
+FROM node:22-slim AS deps
+
+ENV CI=true
+
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@11.8.0 --activate
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY prisma ./prisma/
+
+RUN pnpm install --frozen-lockfile
+
+# ─── Etapa 2: build ──────────────────────────────────────────────────────────
+FROM deps AS builder
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# URL ficticia: Prisma solo necesita el provider para generar el cliente,
+# no hace conexión real durante el build de Next.js.
+ARG DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy
+ENV DATABASE_URL=$DATABASE_URL
+ENV SHADOW_DATABASE_URL=$DATABASE_URL
+
+RUN pnpm prisma generate
+RUN pnpm tsc --noEmit
+RUN pnpm run lint
+RUN pnpm test
+# Better Auth exige un secreto al cargar su configuración; en el build basta uno ficticio.
+RUN BETTER_AUTH_SECRET=build-only-placeholder-not-used-at-runtime pnpm run build
+
+# ─── Etapa 3: herramientas runtime mínimas ───────────────────────────────────
+FROM node:22-slim AS runtime-tools
+
+WORKDIR /runtime
+
+RUN npm init -y > /dev/null && \
+    npm install --omit=dev --no-audit --no-fund \
+      prisma@7.1.0 \
+      tsx@4.20.6 \
+      dotenv@17.2.3 \
+      @prisma/adapter-pg@7.1.0 \
+      pg@8.16.3 && \
+    npm cache clean --force
+
+# ─── Etapa 4: imagen de producción ───────────────────────────────────────────
+FROM node:22-slim AS runner
+
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NODE_PATH=/app/node_modules:/app/tools/node_modules
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+# APP_URL, BETTER_AUTH_SECRET y las credenciales OAuth se pasan al ejecutar el contenedor.
+
+# Usuario no-root para reducir superficie de ataque
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=runtime-tools --chown=nextjs:nodejs /runtime/node_modules ./tools/node_modules
+COPY --from=builder /app/prisma/seed.ts ./prisma/seed.ts
+COPY --from=builder /app/prisma.config.ts ./tools/prisma.config.ts
+COPY --from=builder /app/prisma/schema.prisma ./tools/prisma/schema.prisma
+COPY --from=builder /app/prisma/migrations ./tools/prisma/migrations
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+COPY --chown=nextjs:nodejs docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
+
+USER nextjs
+
+EXPOSE 3000
+
+ENTRYPOINT ["./docker-entrypoint.sh"]

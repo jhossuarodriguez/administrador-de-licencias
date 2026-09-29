@@ -1,0 +1,7 @@
+# Solo para desarrollo local: docker compose lo carga automáticamente.
+# En el servidor, desplegar con: docker compose -f docker-compose.yml up -d
+services:
+  license-administrator:
+    environment:
+      # Debe coincidir con la URL que usa el navegador en local.
+      APP_URL: "http://localhost:3002"

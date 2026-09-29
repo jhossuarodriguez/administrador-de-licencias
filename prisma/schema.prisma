@@ -1,0 +1,187 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ========================================
+// AUTENTICACIÓN (Better Auth: usuarios que inician sesión)
+// Los nombres de modelo se configuran en src/lib/auth.ts porque
+// "user" ya lo usa el modelo de negocio.
+// ========================================
+
+model AuthUser {
+  id              String        @id
+  name            String
+  email           String        @unique
+  emailVerified   Boolean       @default(false)
+  image           String?
+  username        String?       @unique
+  displayUsername String?
+  role            Role          @default(USER)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  sessions        AuthSession[]
+  accounts        AuthAccount[]
+
+  @@map("auth_user")
+}
+
+model AuthSession {
+  id        String   @id
+  token     String   @unique
+  userId    String
+  user      AuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("auth_session")
+}
+
+// Un registro por método de acceso: "credential" (contraseña), "github" o "google".
+model AuthAccount {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("auth_account")
+}
+
+model AuthVerification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("auth_verification")
+}
+
+// Contadores del rate limit cuando se guardan en la base (despliegues serverless como Vercel).
+model AuthRateLimit {
+  id          String @id
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+
+  @@map("auth_rate_limit")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+// ========================================
+// NEGOCIO (usuarios gestionados manualmente)
+// ========================================
+
+model User {
+  id           Int          @id @default(autoincrement())
+  name         String
+  username     String?      @unique
+  status       String       @default("active")
+  departmentId Int?
+  department   Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  startDate    DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  Assignment   Assignment[]
+
+  @@map("user")
+}
+
+model License {
+  id              Int          @id @default(autoincrement())
+  sede            String?
+  provider        String
+  startDate       DateTime?
+  expiration      DateTime?
+  assigned        String?
+  departmentId    Int?
+  department      Department?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  model           String?
+  plan            String?
+  unitCost        Decimal      @db.Decimal(10, 2)
+  installmentCost Decimal      @db.Decimal(10, 2)
+  penaltyCost     Decimal      @db.Decimal(10, 2)
+  currency        Currency     @default(USD)
+  billingCycle    BillingCycle @default(MONTHLY)
+  totalLicense    Int          @default(0)
+  usedLicense     Int          @default(0)
+  active          Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime
+  Assignment      Assignment[]
+}
+
+model Assignment {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  licenseId  Int
+  assignedAt DateTime @default(now())
+  license    License  @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, licenseId])
+}
+
+model SavedReport {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  config      Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lastUsed    DateTime @default(now())
+}
+
+model Department {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  users       User[]
+  licenses    License[]
+}
+
+model Sede {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+}
+
+enum Currency {
+  USD
+  DOP
+}

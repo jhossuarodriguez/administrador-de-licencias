@@ -1,0 +1,44 @@
+services:
+  license-administrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: license-administrator-prod
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    # APP_URL (URL pública; debe coincidir con Origin y con los callbacks de OAuth),
+    # BETTER_AUTH_SECRET y las credenciales de GitHub/Google se definen en .env.
+    # Nginx puede usar HTTP hacia el contenedor.
+    env_file:
+      - .env
+    environment:
+      HOSTNAME: "0.0.0.0"
+      PORT: "3000"
+    depends_on:
+      postgres_prod:
+        condition: service_healthy
+
+  postgres_prod:
+    image: postgres:15-alpine
+    container_name: license-administrator-postgres-prod
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      SHADOW_DATABASE_URL: ${SHADOW_DATABASE_URL}
+    volumes:
+      - licencias_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  licencias_data:

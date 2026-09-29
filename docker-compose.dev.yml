@@ -1,0 +1,40 @@
+services:
+  license-administrator-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: license-administrator-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+    depends_on:
+      postgres_dev:
+        condition: service_healthy
+
+  postgres_dev:
+    image: postgres:15-alpine
+    container_name: license-administrator-postgres-dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      SHADOW_DATABASE_URL: ${SHADOW_DATABASE_URL}
+    volumes:
+      - licencias_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  licencias_dev_data:

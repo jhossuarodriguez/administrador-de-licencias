@@ -1,0 +1,26 @@
+
+export async function testAPI() {
+    try {
+        console.log('🧪 Testing API endpoint...');
+        const response = await fetch('http://localhost:3000/api/licenses');
+
+        if (!response.ok) {
+            console.error(`❌ HTTP Error: ${response.status} - ${response.statusText}`);
+            const errorText = await response.text();
+            console.error('Error body:', errorText);
+            return;
+        }
+
+        const data = await response.json();
+        console.log('✅ API call successful!');
+        console.log(`📊 Found ${data.length} licenses`);
+
+        if (data.length > 0) {
+            console.log('📝 First license:', JSON.stringify(data[0], null, 2));
+        }
+    } catch (error) {
+        console.error('❌ Error testing API:', error.message);
+    }
+}
+
+testAPI();

@@ -1,0 +1,22 @@
+# Secretos: el contenedor recibe las variables al ejecutarse (env_file), y el build
+# standalone de Next.js copiaría cualquier .env del contexto dentro de la imagen.
+**/.env
+**/.env.*
+**/*.pem
+
+# Se instalan y generan dentro de la imagen. El node_modules local (p. ej. de Windows)
+# pisaría en "COPY . ." el que instala la etapa deps.
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+
+# Repositorio, herramientas locales y reportes de pruebas
+.git
+.agents
+.cursor
+.opencode
+playwright-report
+test-results
