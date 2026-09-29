@@ -103,7 +103,7 @@ export function OverviewHeader() {
         <header className="w-full flex items-center justify-between mt-10 border-b border-gray-200 pb-5 ">
             {/* First */}
             <div className="flex-1 flex items-center justify-start gap-x-5 mx-4 md:mx-7">
-                <button
+                <button type="button"
                     className="cursor-pointer p-2 hover:bg-gray-100 bg-white shadow-md rounded-lg transition-colors"
                     onClick={toggleSidebar}
                 >
@@ -119,7 +119,7 @@ export function OverviewHeader() {
             <div className="flex-1 flex justify-end items-center gap-x-5 mr-4 md:mr-10">
                 {/* Notificaciones */}
                 <div className="relative animate-fade-in animate-delay-200 z-50" ref={notificationsRef}>
-                    <button className={`duration-200 relative cursor-pointer bg-white hover:bg-gray-50 rounded-xl w-10 h-10 flex items-center justify-center transition-colors border-2 border-white p-1 ${showNotifications ? 'bg-accent' : 'hover:bg-accent/50'}`} onClick={handleToggleNotifications}>
+                    <button type="button" className={`duration-200 relative cursor-pointer bg-white hover:bg-gray-50 rounded-xl w-10 h-10 flex items-center justify-center transition-colors border-2 border-white p-1 ${showNotifications ? 'bg-accent' : 'hover:bg-accent/50'}`} onClick={handleToggleNotifications}>
                         <Bell className="size-5 text-thirdary" id="notification" />
                         {/* Badge con número - solo visible si hay notificaciones */}
                         {notifications.length > 0 && (
@@ -141,8 +141,7 @@ export function OverviewHeader() {
                                 </div>
 
                                 {notifications.length > 0 ? (
-                                    <>
-                                        <div className="space-y-3 max-h-64 overflow-y-auto">
+                                    <div className="space-y-3 max-h-64 overflow-y-auto">
                                             {notifications.map((notification) => (
                                                 <div key={notification.id} className="flex items-start gap-3 p-2 hover:bg-gray-50 rounded-lg ">
                                                     <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${notification.priority === 'high' ? 'bg-red-500' : notification.priority === 'medium' ? 'bg-primary' : 'bg-gray-400'}`}></div>
@@ -157,7 +156,6 @@ export function OverviewHeader() {
                                                 </div>
                                             ))}
                                         </div>
-                                    </>
                                 ) : (
                                     <div className="flex flex-col items-center justify-center py-8 text-center">
                                         <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
@@ -184,7 +182,7 @@ export function OverviewHeader() {
                         }`}
                 >
                     <div className="relative" ref={profileMenuRef}>
-                        <button
+                        <button type="button"
                             onClick={handleToggleProfileMenu}
                             className="cursor-pointer p-1 hover:bg-gray-100 rounded-lg transition-colors"
                         >
@@ -197,7 +195,7 @@ export function OverviewHeader() {
                                     }`}
                             >
                                 <div className="p-2">
-                                    <button className="w-full flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer">
+                                    <button type="button" className="w-full flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer">
                                         <User className="size-4 text-gray-600" />
                                         <span className="text-sm text-gray-700">Mi Perfil</span>
                                     </button>
@@ -206,7 +204,7 @@ export function OverviewHeader() {
                                         <span className="text-sm text-gray-700">Configuración</span>
                                     </Link>
                                     <hr className="my-2" />
-                                    <button
+                                    <button type="button"
                                         onClick={handleLogout}
                                         className="w-full flex items-center gap-3 p-2 hover:bg-red-50 rounded-lg transition-colors text-left group cursor-pointer"
                                     >

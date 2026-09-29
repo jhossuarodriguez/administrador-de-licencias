@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 import { DEMO_ACCOUNT, isDemoMode } from './demo';
 import { hashPassword } from './password';
 

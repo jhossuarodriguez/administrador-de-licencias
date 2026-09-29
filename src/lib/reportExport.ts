@@ -62,7 +62,7 @@ export const jsonToCSV = (data: Record<string, unknown>[]): string => {
         const values = headers.map(header => {
             const value = row[header];
             // Escapar valores que contengan comas o comillas
-            const escaped = ('' + value).replace(/"/g, '""');
+            const escaped = (`${value}`).replace(/"/g, '""');
             return `"${escaped}"`;
         });
         csvRows.push(values.join(','));

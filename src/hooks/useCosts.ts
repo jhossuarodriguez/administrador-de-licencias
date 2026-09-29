@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
-import { LicenseCost } from "@/types";
+import type { LicenseCost } from "@/types";
 import {
     handleError,
     filterNullish,

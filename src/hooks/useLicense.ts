@@ -1,6 +1,6 @@
 import useSWR, { mutate as globalMutate } from "swr";
 import { fetcher } from "@/lib/fetcher";
-import { License } from "@/types";
+import type { License } from "@/types";
 import {
     handleError,
     filterNullish,
@@ -8,7 +8,7 @@ import {
     withRetry,
     sanitizeFilters
 } from "@/lib/hookUtils";
-import { useLicenseReturn, LicenseConfig } from "@/types/license";
+import type { useLicenseReturn, LicenseConfig } from "@/types/license";
 import type { Result } from "@/types/result";
 import type { LicenseFormValues } from "@/lib/validations/license";
 

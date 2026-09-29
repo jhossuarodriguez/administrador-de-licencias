@@ -6,11 +6,11 @@ import { Line, XAxis, YAxis, CartesianGrid, BarChart, Bar, ComposedChart } from 
 import { AlertTriangle, Target, Calculator, PieChart as PieChartIcon } from 'lucide-react';
 import { useSummary, chartConfig } from '@/hooks/useSummary';
 import { CostCards } from './cards/CostTabCards';
-import { ReportFilters } from '@/hooks/useReportTypes';
+import type { ReportFilters } from '@/hooks/useReportTypes';
 import { CurrencyAmount } from '@/components/currency/CurrencyAmount';
 import { useUsdDopRate } from '@/hooks/useExchangeRate';
 import { formatDualCurrencyFromUsd } from '@/lib/utils';
-import { ProviderCost } from '@/types';
+import type { ProviderCost } from '@/types';
 
 interface CostAnalysisProps {
     filters?: ReportFilters;
@@ -180,11 +180,11 @@ export default function CostAnalysis({ filters }: CostAnalysisProps) {
                 <CardContent>
                     <div className="space-y-4">
                         {(data?.underutilizedLicenses && data?.underutilizedLicenses.length > 0) ? (
-                            data.underutilizedLicenses.map((license, index) => {
+                            data.underutilizedLicenses.map((license) => {
                                 const utilizationRate = (license.usedLicense / license.totalLicense) * 100;
                                 const efficiency = utilizationRate >= 80 ? 'high' : utilizationRate >= 60 ? 'medium' : 'low';
                                 return (
-                                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                                    <div key={license.id} className="flex items-center justify-between p-4 border rounded-lg">
                                         <div className="flex-1">
                                             <div className="flex items-center gap-3">
                                                 <div>

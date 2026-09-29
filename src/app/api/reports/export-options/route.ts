@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { z } from "zod"
 import { reportExportOptionsQuerySchema } from "@/lib/validations/report";
 import { requireApiSession } from "@/lib/apiAuth";
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
                 case 'inactive':
                     where.active = false;
                     break;
-                case 'expiring':
+                case 'expiring': {
                     const now = new Date();
                     const thirtyDaysFromNow = new Date(now.getTime() + (30 * 24 * 60 * 60 * 1000));
                     where.active = true;
@@ -64,6 +64,7 @@ export async function GET(request: NextRequest) {
                         gte: now
                     };
                     break;
+                }
             }
         }
 

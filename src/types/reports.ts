@@ -44,6 +44,7 @@ export interface SummaryResponse {
         savings_potential: number;
     }>;
     underutilizedLicenses?: Array<{
+        id: number;
         provider: string;
         model: string;
         usedLicense: number;

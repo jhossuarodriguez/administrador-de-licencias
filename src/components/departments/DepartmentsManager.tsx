@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useDepartments } from '@/hooks/useDepartments'
-import { DepartmentConfig } from '@/types/department'
+import type { DepartmentConfig } from '@/types/department'
 import { Building2, Plus, Pencil, Trash2, Power, PowerOff, Save, X, AlertCircle } from 'lucide-react'
 import { useState } from 'react'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
@@ -372,7 +372,6 @@ export function DepartmentsManager({ initialData, isAdmin }: { initialData: Depa
                 >
                     <div
                         className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 animate-in zoom-in-95 duration-200"
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, createContext, useContext } from 'react';
-import { SidebarContextType } from '@/types';
+import type { SidebarContextType } from '@/types';
 
 const SidebarContext = createContext<SidebarContextType>({
     isSidebarOpen: true,

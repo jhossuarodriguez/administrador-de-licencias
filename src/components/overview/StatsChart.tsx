@@ -44,9 +44,9 @@ export function StatsChart() {
         )
     }
 
-    const usageValues = stats?.chartData?.map(d => d.usage).filter(val => !isNaN(val) && val > 0) || [0]
+    const usageValues = stats?.chartData?.map(d => d.usage).filter(val => !Number.isNaN(val) && val > 0) || [0]
     const maxUso = usageValues.length > 0 ? Math.max(...usageValues) : 0
-    const totalUso = stats?.chartData?.reduce((sum, d) => sum + (isNaN(d.usage) ? 0 : d.usage), 0) || 0
+    const totalUso = stats?.chartData?.reduce((sum, d) => sum + (Number.isNaN(d.usage) ? 0 : d.usage), 0) || 0
 
     return (
         <div className="relative p-4 bg-white rounded-xl lg:col-span-4 md:p-6 hidden md:block overflow-hidden animate-fade-in animate-delay-500">

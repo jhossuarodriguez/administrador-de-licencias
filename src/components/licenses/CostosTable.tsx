@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import type { LicenseCost } from '@/types';
 import type { SearchableValue } from '@/lib/tableUtils';
 import { AlertCircle, CalendarClock, DollarSign, ReceiptText, Search, Sparkles } from 'lucide-react';
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const costColumns = [
     { key: 'unitCost', label: 'Unitario', description: 'Base' },

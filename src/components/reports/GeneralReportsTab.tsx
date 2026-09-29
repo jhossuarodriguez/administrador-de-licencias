@@ -1,7 +1,7 @@
 'use client';
 
 import { GeneralReportsGraph } from './graph/GeneralReportsGraph';
-import { ReportFilters } from '@/hooks/useReportTypes';
+import type { ReportFilters } from '@/hooks/useReportTypes';
 
 interface AdvancedChartsProps {
     filters?: ReportFilters;

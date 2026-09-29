@@ -60,7 +60,7 @@ export function AddLicenseDialog({ departments, users, sedes }: { departments: D
                 unitCost: parseFloat(config.unitCost) || 0,
                 installmentCost: parseFloat(config.installmentCost) || 0,
                 billingCycle: config.billingCycle,
-                totalLicense: parseInt(config.totalLicense) || 0,
+                totalLicense: parseInt(config.totalLicense, 10) || 0,
                 active: config.active,
             }
 
@@ -88,7 +88,6 @@ export function AddLicenseDialog({ departments, users, sedes }: { departments: D
                 >
                     <div
                         className="bg-white rounded-lg shadow-xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200"
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
@@ -197,7 +196,7 @@ export function AddLicenseDialog({ departments, users, sedes }: { departments: D
                                         onChange={(e) =>
                                             setConfig((prev) => ({
                                                 ...prev,
-                                                departmentId: e.target.value ? parseInt(e.target.value) : null,
+                                                departmentId: e.target.value ? parseInt(e.target.value, 10) : null,
                                             }))
                                         }
                                     >

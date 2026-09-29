@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
-import { FilterOptions, UseFilterOptionsReturn } from '@/types';
+import type { FilterOptions, UseFilterOptionsReturn } from '@/types';
 
 export function useFilterOptions(options?: { refreshTrigger?: number }): UseFilterOptionsReturn {
     const { refreshTrigger = 0 } = options || {};

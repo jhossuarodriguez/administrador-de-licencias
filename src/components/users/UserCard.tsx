@@ -47,13 +47,13 @@ export function UserCard({ user, isAdmin, onEdit, onDelete }: UserCardProps) {
 
             {isAdmin && (
                 <div className="flex flex-col gap-2">
-                    <button
+                    <button type="button"
                         className="w-full py-2 text-sm text-secondary border border-secondary rounded hover:bg-secondary hover:text-white transition-colors"
                         onClick={() => onEdit(user.id)}
                     >
                         Editar Usuario
                     </button>
-                    <button
+                    <button type="button"
                         className="w-full py-2 text-sm text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white transition-colors"
                         onClick={() => onDelete(user.id)}
                     >

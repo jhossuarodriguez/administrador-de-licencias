@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { randomBytes, pbkdf2Sync, randomUUID } from 'crypto';
+import { randomBytes, pbkdf2Sync, randomUUID } from 'node:crypto';
 import 'dotenv/config';
 
 const connectionString = process.env.DATABASE_URL;

@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, Building, Clock, Shield, TrendingDown, Users } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAudit } from "@/hooks/useAudit";
-import { ReportFilters } from "@/hooks/useReportTypes";
-import { AssignmentHistoryRecord, UserActivityRecord, DepartmentAccessRecord } from "@/types";
+import type { ReportFilters } from "@/hooks/useReportTypes";
+import type { AssignmentHistoryRecord, UserActivityRecord, DepartmentAccessRecord } from "@/types";
 
 interface AuditTabCardsProps {
     filters?: ReportFilters;

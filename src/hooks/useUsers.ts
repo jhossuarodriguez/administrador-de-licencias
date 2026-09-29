@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
-import { User } from "@/types";
+import type { User } from "@/types";
 import type { Result } from "@/types/result";
 import {
     handleError,
@@ -9,7 +9,7 @@ import {
     withRetry,
     sanitizeFilters
 } from "@/lib/hookUtils";
-import { UserConfig, UseUsersReturn } from "@/types/user";
+import type { UserConfig, UseUsersReturn } from "@/types/user";
 import type { UserFormValues } from "@/lib/validations/users";
 
 // Fetcher tipado específicamente para usuarios

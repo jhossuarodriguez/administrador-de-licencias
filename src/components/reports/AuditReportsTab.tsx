@@ -1,7 +1,7 @@
 'use client';
 
 import { AuditTabCards } from './cards/AuditTabCards';
-import { ReportFilters } from '@/hooks/useReportTypes';
+import type { ReportFilters } from '@/hooks/useReportTypes';
 
 interface AuditReportsProps {
     filters?: ReportFilters;

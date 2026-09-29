@@ -74,7 +74,7 @@ export const withRetry = async <T>(
             lastError = error instanceof Error ? error : new Error('Unknown error');
 
             if (attempt < maxRetries) {
-                const delay = backoff ? retryDelay * Math.pow(2, attempt) : retryDelay;
+                const delay = backoff ? retryDelay * 2 ** attempt : retryDelay;
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
         }

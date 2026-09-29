@@ -31,7 +31,7 @@ export default function LeftSidebar() {
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [showProfileMenu]);
+    }, []);
 
     const handleToggleMenu = () => {
         if (showProfileMenu) {
@@ -59,7 +59,7 @@ export default function LeftSidebar() {
             {/* Perfil */}
             <div className="flex flex-col justify-center md:justify-start items-start mt-10">
                 <div className='relative' ref={menuRef}>
-                    <button
+                    <button type="button"
                         onClick={handleToggleMenu}
                         className='flex flex-row gap-2 justify-center items-center px-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer py-2'
                     >
@@ -73,7 +73,7 @@ export default function LeftSidebar() {
                     {showProfileMenu && (
                         <div className={`absolute top-14 left-2 md:left-0 w-12 md:w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 transition-all animate-in fade-in duration-200 ${isClosing ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>
                             <div className="p-2">
-                                <button className="w-full flex items-center justify-center md:justify-start gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer" disabled>
+                                <button type="button" className="w-full flex items-center justify-center md:justify-start gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer" disabled>
                                     <User className="size-4 text-gray-600" />
                                     <span className="text-sm text-gray-700 hidden md:inline">Mi Perfil</span>
                                 </button>
@@ -82,7 +82,7 @@ export default function LeftSidebar() {
                                     <span className="text-sm text-gray-700 hidden md:inline">Configuración</span>
                                 </Link>
                                 <hr className="my-2" />
-                                <button
+                                <button type="button"
                                     onClick={handleLogout}
                                     className="w-full flex items-center justify-center md:justify-start gap-3 p-2 hover:bg-red-50 rounded-lg transition-colors text-left group cursor-pointer"
                                 >

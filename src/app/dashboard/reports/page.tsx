@@ -9,7 +9,7 @@ import { useSummary } from '@/hooks/useSummary';
 import { useTemporal } from '@/hooks/useTemporal';
 import { useAudit } from '@/hooks/useAudit';
 import { CurrencyAmount } from '@/components/currency/CurrencyAmount';
-import { ReportConfig } from '@/types';
+import type { ReportConfig } from '@/types';
 
 // Importar todos los componentes de reportes
 import ReportFilters from '@/components/reports/ReportFilters';

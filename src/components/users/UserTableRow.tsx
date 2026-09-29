@@ -33,11 +33,11 @@ export function UserTableRow({ user, isAdmin, onEdit, onDelete }: UserTableRowPr
             </td>
             {isAdmin && (
                 <td className="px-6 py-4 flex gap-3 justify-center">
-                    <button className="cursor-pointer text-secondary hover:underline" onClick={() => onEdit(user.id)}>
+                    <button type="button" className="cursor-pointer text-secondary hover:underline" onClick={() => onEdit(user.id)}>
                         Editar
                     </button>
                     |
-                    <button className="cursor-pointer text-red-500/60 hover:underline" onClick={() => onDelete(user.id)}>
+                    <button type="button" className="cursor-pointer text-red-500/60 hover:underline" onClick={() => onDelete(user.id)}>
                         Eliminar
                     </button>
                 </td>

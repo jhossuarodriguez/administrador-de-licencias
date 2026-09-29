@@ -86,13 +86,13 @@ export default function SavedReports() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex gap-2 justify-center">
-                                            <button
+                                            <button type="button"
                                                 className="cursor-pointer text-primary hover:underline"
                                                 onClick={() => handleViewReport(report.id)}
                                             >
                                                 Ver
                                             </button>
-                                            <button
+                                            <button type="button"
                                                 className="cursor-pointer text-secondary hover:underline"
                                                 onClick={() => handleEditReport(report.id)}
                                             >
@@ -141,13 +141,13 @@ export default function SavedReports() {
                                 </div>
 
                                 <div className="flex gap-3">
-                                    <button
+                                    <button type="button"
                                         className="flex-1 py-2 text-sm text-primary border border-primary rounded hover:bg-primary hover:text-white transition-colors"
                                         onClick={() => handleViewReport(report.id)}
                                     >
                                         Ver Reporte
                                     </button>
-                                    <button
+                                    <button type="button"
                                         className="flex-1 py-2 text-sm text-secondary border border-secondary rounded hover:bg-secondary hover:text-white transition-colors"
                                         onClick={() => handleEditReport(report.id)}
                                     >

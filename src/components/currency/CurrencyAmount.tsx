@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useUsdDopRate } from '@/hooks/useExchangeRate';
 import { cn, dopToUsd, formatDopCurrency, formatUsdCurrency, usdToDop } from '@/lib/utils';
 
@@ -31,7 +32,7 @@ function CurrencyLine({
     return (
         <span className={cn('inline-flex items-center gap-1', className)}>
             <span role="img" aria-label={meta.ariaLabel} title={code} className="text-xs leading-none inline-flex">
-                <img src={meta.flag} alt={code} className="size-6 object-contain mr-2" />
+                <Image src={meta.flag} alt={code} width={24} height={24} className="size-6 object-contain mr-2" />
             </span>
             {label}
         </span>

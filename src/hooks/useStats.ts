@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
-import { DashboardStats, DashboardApiResponse } from "@/types";
+import type { DashboardStats, DashboardApiResponse } from "@/types";
 import {
     handleError,
     withRetry,

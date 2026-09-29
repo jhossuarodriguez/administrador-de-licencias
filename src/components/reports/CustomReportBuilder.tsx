@@ -11,7 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Settings, Plus, Download, RefreshCw, AlertCircle, Info, Trash2, CheckCircle, FileEdit, BarChart3, ArrowRight } from 'lucide-react';
 import { useReportBuilderOptions } from '@/hooks/useReportBuilderOptions';
 import { useCustomReportBuilder } from '@/hooks/useCustomReportBuilder';
-import { ReportConfig } from '@/types';
+import type { ReportConfig } from '@/types';
 import { useEscapeKey } from '@/hooks/useEscapeKey';
 
 interface CustomReportBuilderProps {
@@ -207,6 +207,7 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                         {savedReportsLoading ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {Array.from({ length: 4 }).map((_, index) => (
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: skeleton estático, nunca se reordena
                                     <div key={index} className="h-32 bg-muted animate-pulse rounded-lg"></div>
                                 ))}
                             </div>
@@ -355,6 +356,7 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                             {optionsLoading ? (
                                 <div className="grid grid-cols-1 gap-3">
                                     {Array.from({ length: 6 }).map((_, index) => (
+                                        // biome-ignore lint/suspicious/noArrayIndexKey: skeleton estático, nunca se reordena
                                         <div key={index} className="h-16 bg-muted animate-pulse rounded-lg"></div>
                                     ))}
                                 </div>
@@ -362,9 +364,11 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                                 <ScrollArea className="h-[280px] pr-3">
                                     <div className="grid grid-cols-1 gap-3">
                                         {options.metrics.map((metric) => (
-                                            <div
+                                            <button
+                                                type="button"
                                                 key={metric.id}
-                                                className={`p-3 border rounded-lg cursor-pointer transition-colors ${reportConfig.metrics.includes(metric.id)
+                                                aria-pressed={reportConfig.metrics.includes(metric.id)}
+                                                className={`w-full text-left p-3 border rounded-lg cursor-pointer transition-colors ${reportConfig.metrics.includes(metric.id)
                                                     ? 'border-secondary bg-primary/10'
                                                     : 'border-muted hover:border-secondary/50'
                                                     }`}
@@ -387,7 +391,7 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                                                         </Badge>
                                                     )}
                                                 </div>
-                                            </div>
+                                            </button>
                                         ))}
                                     </div>
                                 </ScrollArea>
@@ -625,7 +629,6 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                 >
                     <div
                         className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 animate-in zoom-in-95 duration-200"
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
@@ -673,7 +676,6 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                 >
                     <div
                         className="bg-white rounded-lg shadow-xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200"
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
@@ -716,6 +718,7 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                                     {optionsLoading ? (
                                         <div className="grid grid-cols-1 gap-3">
                                             {Array.from({ length: 4 }).map((_, index) => (
+                                                // biome-ignore lint/suspicious/noArrayIndexKey: skeleton estático, nunca se reordena
                                                 <div key={index} className="h-16 bg-muted animate-pulse rounded-lg"></div>
                                             ))}
                                         </div>
@@ -723,9 +726,11 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                                         <ScrollArea className="h-[200px] pr-3">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 {options.metrics.map((metric) => (
-                                                    <div
+                                                    <button
+                                                        type="button"
                                                         key={metric.id}
-                                                        className={`p-3 border rounded-lg cursor-pointer transition-colors ${reportConfig.metrics.includes(metric.id)
+                                                        aria-pressed={reportConfig.metrics.includes(metric.id)}
+                                                        className={`w-full text-left p-3 border rounded-lg cursor-pointer transition-colors ${reportConfig.metrics.includes(metric.id)
                                                             ? 'border-secondary bg-secondary/10'
                                                             : 'border-muted hover:border-secondary/50'
                                                             }`}
@@ -747,7 +752,7 @@ export default function CustomReportBuilder({ onGenerateReport, onExportReport, 
                                                                 </Badge>
                                                             )}
                                                         </div>
-                                                    </div>
+                                                    </button>
                                                 ))}
                                             </div>
                                         </ScrollArea>

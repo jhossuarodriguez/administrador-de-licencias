@@ -63,10 +63,10 @@ export function AboutExpired() {
                 {expiringNames?.length > 0 ? (
                     <div className="flex flex-col flex-1">
                         <div className="space-y-0">
-                            {expiringNames.map((license, index) => {
+                            {expiringNames.map((license) => {
                                 return (
                                     <div
-                                        key={index}
+                                        key={license.id}
                                         className="flex items-center justify-between py-3 border-b last:border-0 hover:bg-gray-50 transition-colors px-2 rounded group"
                                     >
                                         <span className="flex items-center gap-2 text-gray-700 text-sm md:text-base font-medium">

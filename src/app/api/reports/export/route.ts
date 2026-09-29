@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { z } from "zod";
 import { reportExportQuerySchema } from "@/lib/validations/report";
 import { requireApiSession } from "@/lib/apiAuth";

@@ -1,6 +1,6 @@
 'use client';
 import { TemporalAnalysisGraph } from './graph/TemporalAnalysisGraph';
-import { TemporalFilters } from '@/hooks/useReportTypes';
+import type { TemporalFilters } from '@/hooks/useReportTypes';
 
 interface TemporalAnalysisProps {
     filters?: TemporalFilters;

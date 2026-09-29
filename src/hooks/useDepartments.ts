@@ -2,7 +2,7 @@
  * Hook personalizado para manejar operaciones CRUD de departamentos
  */
 
-import { Department, DepartmentConfig, useDepartmentsReturn } from "@/types/department";
+import type { Department, DepartmentConfig, useDepartmentsReturn } from "@/types/department";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 

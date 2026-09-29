@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useSummary, chartConfig } from "@/hooks/useSummary"
-import { ReportFilters, CHART_COLORS } from "@/hooks/useReportTypes";
+import { type ReportFilters, CHART_COLORS } from "@/hooks/useReportTypes";
 import type { ProviderCost } from "@/types";
 import { AlertTriangle, Building, Users } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, XAxis, YAxis } from "recharts";
@@ -112,7 +112,7 @@ export function GeneralReportsGraph({ filters }: GeneralReportsGraphProps) {
                                         label={renderProviderLabel}
                                     >
                                         {providerChartData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                                            <Cell key={entry.provider} fill={CHART_COLORS[index % CHART_COLORS.length]} />
                                         ))}
                                     </Pie>
                                     <ChartTooltip

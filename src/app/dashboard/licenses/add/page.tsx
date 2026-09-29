@@ -78,7 +78,7 @@ export default function AddLicensePage() {
                 unitCost: parseFloat(formData.unitCost) || 0,
                 installmentCost: parseFloat(formData.installmentCost) || 0,
                 billingCycle: formData.billingCycle,
-                totalLicense: parseInt(formData.totalLicense) || 0,
+                totalLicense: parseInt(formData.totalLicense, 10) || 0,
                 active: formData.active
             };
 

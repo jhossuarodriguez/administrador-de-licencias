@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Filter, X } from 'lucide-react';
 import { useFilterOptions } from '@/hooks/useFilterOptions';
 import { debounce } from '@/lib/hookUtils';
-import { Filters } from '@/types';
+import type { Filters } from '@/types';
 
 interface ReportFiltersProps {
     onFiltersChange: (filters: Filters) => void;
@@ -193,7 +193,7 @@ export default function ReportFilters({ onFiltersChange, loading = false, refres
                                         className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary rounded-md text-xs"
                                     >
                                         {label}: {value}
-                                        <button
+                                        <button type="button"
                                             onClick={() => handleFilterChange(key, '')}
                                             className="hover:bg-primary/20 rounded p-0.5"
                                         >

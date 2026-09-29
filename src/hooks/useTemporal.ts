@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { BASE_CHART_CONFIG } from "./useReportTypes";
 import { fetcher } from "@/lib/fetcher";
-import { TemporalFilters, TemporalAnalysis } from "@/types";
+import type { TemporalFilters, TemporalAnalysis } from "@/types";
 import {
     generateCacheKey,
     handleError,

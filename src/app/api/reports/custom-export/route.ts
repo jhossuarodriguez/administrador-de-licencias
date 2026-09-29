@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
-import {
+import type { Prisma } from '@prisma/client';
+import type {
     CustomReportData,
     GroupedByProvider,
     GroupedByDepartment,
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
         // Aplicar rango de fechas
         if (dateRange && dateRange !== 'all') {
-            const days = parseInt(dateRange);
+            const days = parseInt(dateRange, 10);
             const startDate = new Date();
             startDate.setDate(startDate.getDate() - days);
 
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
                 where.provider = filters.provider;
             }
             if (filters.department) {
-                where.departmentId = parseInt(filters.department);
+                where.departmentId = parseInt(filters.department, 10);
             }
             if (filters.billingCycle) {
                 where.billingCycle = filters.billingCycle;
@@ -229,10 +229,10 @@ export async function POST(request: NextRequest) {
                     department: 'Departamento',
                     billingCycle: 'Ciclo de Facturacion'
                 };
-                csvContent += 'Agrupado por:,' + (groupByLabels[groupBy] || groupBy) + '\n';
+                csvContent += `Agrupado por:,${groupByLabels[groupBy] || groupBy}\n`;
             }
             if (dateRange && dateRange !== 'all') {
-                csvContent += 'Rango de fechas:,Ultimos ' + dateRange + ' dias\n';
+                csvContent += `Rango de fechas:,Ultimos ${dateRange} dias\n`;
             }
             csvContent += '\n';
         }
@@ -260,14 +260,14 @@ export async function POST(request: NextRequest) {
                 ? value.toFixed(2)
                 : value;
 
-            csvContent += metricInfo.name + ',' + formattedValue + ',' + metricInfo.unit + '\n';
+            csvContent += `${metricInfo.name},${formattedValue},${metricInfo.unit}\n`;
         }
 
         // Datos agrupados si existen
         if (detailedData.length > 0) {
             csvContent += '\n';
             csvContent += '\n';
-            csvContent += 'ANALISIS DETALLADO - AGRUPADO POR ' + (groupBy?.toUpperCase() || '') + '\n';
+            csvContent += `ANALISIS DETALLADO - AGRUPADO POR ${groupBy?.toUpperCase() || ''}\n`;
             csvContent += '\n';
 
             if (groupBy === 'provider') {
@@ -327,8 +327,8 @@ export async function POST(request: NextRequest) {
                 const unitCost = 'unitCost' in row._sum ? row._sum.unitCost : 0;
                 return sum + Number(unitCost || 0);
             }, 0);
-            csvContent += 'Total de Licencias,' + totalLicenses + '\n';
-            csvContent += 'Costo Total,' + totalCost.toFixed(2) + ',USD\n';
+            csvContent += `Total de Licencias,${totalLicenses}\n`;
+            csvContent += `Costo Total,${totalCost.toFixed(2)},USD\n`;
         }
 
         // Pie de página simple
@@ -337,10 +337,10 @@ export async function POST(request: NextRequest) {
         csvContent += 'INFORMACION DEL REPORTE\n';
         csvContent += '\n';
         csvContent += 'Sistema:,Administrador de Licencias\n';
-        csvContent += 'Fecha generacion:,' + new Date().toISOString().split('T')[0] + '\n';
-        csvContent += 'Nombre reporte:,' + (config.name || 'Sin nombre') + '\n';
+        csvContent += `Fecha generacion:,${new Date().toISOString().split('T')[0]}\n`;
+        csvContent += `Nombre reporte:,${config.name || 'Sin nombre'}\n`;
         if (config.description) {
-            csvContent += 'Descripcion:,' + config.description + '\n';
+            csvContent += `Descripcion:,${config.description}\n`;
         }
         csvContent += '\n';
 

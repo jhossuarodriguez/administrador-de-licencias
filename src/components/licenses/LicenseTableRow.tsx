@@ -27,11 +27,11 @@ export function LicenseTableRow({ license, isAdmin, onEdit, onDelete }: LicenseT
             <td className="px-6 py-4">{license.model}</td>
             {isAdmin && (
                 <td className="px-6 py-4 flex gap-2 justify-center">
-                    <button className="cursor-pointer text-secondary hover:underline" onClick={() => onEdit(license.id)}>
+                    <button type="button" className="cursor-pointer text-secondary hover:underline" onClick={() => onEdit(license.id)}>
                         Editar
                     </button>
                     |
-                    <button className="cursor-pointer text-red-500/60 hover:underline" onClick={() => onDelete(license.id)}>
+                    <button type="button" className="cursor-pointer text-red-500/60 hover:underline" onClick={() => onDelete(license.id)}>
                         Eliminar
                     </button>
                 </td>

@@ -1,7 +1,7 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
-import {
+import type {
     LicenseCreationTrend,
     UtilizationTrend,
     SeasonalAnalysis,

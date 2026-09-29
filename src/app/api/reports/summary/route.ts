@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { convertBigIntToNumber } from '@/lib/utils';
-import { MonthlyTrendQueryResult } from '@/types';
+import type { MonthlyTrendQueryResult } from '@/types';
 import { z } from "zod";
 import { reportSummaryQuerySchema } from "@/lib/validations/report";
 import { requireApiSession } from "@/lib/apiAuth";
@@ -217,6 +217,7 @@ export async function GET(request: Request) {
                 }
             },
             select: {
+                id: true,
                 provider: true,
                 model: true,
                 usedLicense: true,
@@ -233,6 +234,7 @@ export async function GET(request: Request) {
                 const monthlyCost = Number(l.unitCost || 0);
                 const potentialSavings = Math.round(monthlyCost * (1 - utilization));
                 return {
+                    id: l.id,
                     provider: l.provider,
                     model: l.model,
                     usedLicense: used,

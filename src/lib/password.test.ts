@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pbkdf2Sync, randomBytes } from 'crypto';
+import { pbkdf2Sync, randomBytes } from 'node:crypto';
 import { hashPassword, verifyPassword } from './password';
 
 // Hash tal como lo guardaba el login anterior (y como lo genera prisma/seed.ts).

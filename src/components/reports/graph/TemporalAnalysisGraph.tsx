@@ -6,7 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Area, Composed
 import { Calendar, Target, BarChart3, Clock, Activity, AlertTriangle } from 'lucide-react';
 
 import { useTemporal, chartConfig } from "@/hooks/useTemporal"
-import { TemporalFilters } from '@/hooks/useReportTypes';
+import type { TemporalFilters } from '@/hooks/useReportTypes';
 import { useUsdDopRate } from '@/hooks/useExchangeRate';
 import { formatDualCurrencyFromUsd } from '@/lib/utils';
 

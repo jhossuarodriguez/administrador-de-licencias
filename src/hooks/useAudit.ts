@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
-import { ReportFilters, AuditReports } from "@/types";
+import type { ReportFilters, AuditReports } from "@/types";
 import {
     generateCacheKey,
     handleError,

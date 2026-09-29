@@ -47,7 +47,7 @@ export function LicenseCard({ license, isAdmin, onEdit }: LicenseCardProps) {
             </div>
 
             {isAdmin && (
-                <button
+                <button type="button"
                     className="w-full py-2 text-sm text-secondary border border-secondary rounded hover:bg-secondary hover:text-white transition-colors"
                     onClick={() => onEdit(license.id)}
                 >

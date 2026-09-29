@@ -15,6 +15,7 @@ export function MostUsedLicenses() {
                     <div className="h-6 mb-4 bg-gray-200 rounded"></div>
                     <div className="space-y-3">
                         {[...Array(5)].map((_, i) => (
+                            // biome-ignore lint/suspicious/noArrayIndexKey: skeleton estático, nunca se reordena
                             <div key={i}>
                                 <div className="h-4 mb-2 bg-gray-200 rounded"></div>
                                 <div className="h-3 bg-gray-100 rounded"></div>

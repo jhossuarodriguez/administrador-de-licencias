@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
 import { generateCacheKey } from '@/lib/hookUtils';
-import {
+import type {
     ExportOptions,
     UseExportOptionsProps,
     UseExportOptionsReturn

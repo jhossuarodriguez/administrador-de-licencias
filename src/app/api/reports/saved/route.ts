@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 import { idQuerySchema } from "@/lib/validations/common";
 import { savedReportCreateSchema, savedReportUpdateSchema } from "@/lib/validations/savedReports";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import { requireAdminRequest, requireApiSession } from "@/lib/apiAuth";
 
 // Obtener todos los reportes guardados

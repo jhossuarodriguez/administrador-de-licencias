@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { BASE_CHART_CONFIG } from "./useReportTypes";
 import { fetcher } from "@/lib/fetcher";
-import {
+import type {
     ReportFilters,
     SummaryResponse
 } from "@/types";
