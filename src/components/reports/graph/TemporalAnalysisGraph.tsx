@@ -81,7 +81,7 @@ export function TemporalAnalysisGraph({ filters }: TemporalAnalysisGraphProps) {
                                         formatter={(value, name) => {
                                             const numValue = Number(value);
                                             return [
-                                                name === 'utilization_percentage' ? `${value.toLocaleString()}%` : value,
+                                                name === 'utilization_percentage' ? `${value?.toLocaleString()}%` : value,
                                                 name === 'total_seats' ? (numValue === 1 ? ' Licencia Total' : ' Licencias Totales') :
                                                     name === 'used_seats' ? (numValue === 1 ? ' Licencia Usada' : ' Licencias Usadas') :
                                                         name === 'utilization_percentage' ? ' Utilización (%)' : name
